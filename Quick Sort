@@ -1,26 +1,26 @@
-arr=[7,6,1,5,9,2,1,15,7]
-lb=arr[0]
-ub=arr[-1]
-def Partition(arr,lb,ub):
-    pivot=arr[lb]
-    start=lb
-    end=ub
-    while start<end:
-        while arr[start]<=pivot:
-            start+=1
-        while arr[end]>pivot:
-            end-=1
-        if start<end:
-            temp=arr[start]
-            arr[start]=arr[end]
-            arr[end]=temp
-    temp=arr[lb]
-    arr[lb]=arr[end]
-    arr[end]=temp
-def QuickSort(arr,lb,ub):
-    if lb<ub:
-        loc=Partition(arr,lb,ub)
-        QuickSort(arr,lb,loc-1)
-        QuickSort(arr,loc+1,ub)
+def quicksort(arr,left,right):
+    if left<right:
+        partition_pos=partition(arr,left,right)
+        quicksort(arr,left,partition_pos-1)
+        quicksort(arr,partition_pos+1,right)
+def partition(arr,left,right):
+    i=left
+    j=right-1
+    pivot=arr[right]
+    
+    while i<j:
+        while i<right and arr[i]<pivot:
+            i+=1
+        while j>left and arr[j]>=pivot:
+            j-=1
+        if i<j:
+            arr[i],arr[j]=arr[j],arr[i]
+    if arr[i]>pivot:
+            arr[i],arr[right]=arr[right],arr[i]
+    return i
+    
+arr=[22,11,88,66,55,77,33,44]
+quicksort(arr,0,len(arr)-1)
+print(arr)
         
             
