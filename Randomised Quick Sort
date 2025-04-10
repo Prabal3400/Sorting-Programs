@@ -1,0 +1,28 @@
+def sortArray(self, nums: List[int]) -> List[int]:
+        if not nums:
+            return nums
+        self.Randomized_QuickSort(nums, 0, len(nums) - 1)
+        return nums
+
+    def Randomized_QuickSort(self, nums: List[int], left: int, right: int) -> None:
+        if left < right:
+            # Randomly select pivot and swap with the rightmost element
+            pivot_index = random.randint(left, right)
+            nums[pivot_index], nums[right] = nums[right], nums[pivot_index]
+            
+            # Apply Lomuto partition scheme
+            pos = self.Lomuto_Partition(nums, left, right)
+            
+            # Recursively sort the left and right parts
+            self.Randomized_QuickSort(nums, left, pos - 1)
+            self.Randomized_QuickSort(nums, pos + 1, right)
+
+    def Lomuto_Partition(self, nums: List[int], left: int, right: int) -> int:
+        pivot = nums[right]
+        i = left
+        for j in range(left, right):
+            if nums[j] <= pivot:
+                nums[i], nums[j] = nums[j], nums[i]
+                i += 1
+        nums[i], nums[right] = nums[right], nums[i]
+        return i
