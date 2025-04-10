@@ -1,0 +1,21 @@
+def sortArray(self, nums: List[int]) -> List[int]:
+        if not nums:
+            return nums
+        self.Quick_sort(nums, 0, len(nums) - 1)
+        return nums
+
+    def Quick_sort(self, nums: List[int], left: int, right: int) -> None:
+        if left < right:
+            pos = self.Partition(nums, left, right)
+            self.Quick_sort(nums, left, pos - 1)
+            self.Quick_sort(nums, pos + 1, right)
+
+    def Partition(self, nums: List[int], left: int, right: int) -> int:
+        pivot = nums[right]
+        i = left
+        for j in range(left, right):
+            if nums[j] <= pivot:
+                nums[i], nums[j] = nums[j], nums[i]
+                i += 1
+        nums[i], nums[right] = nums[right], nums[i]
+        return i
